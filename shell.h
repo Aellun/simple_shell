@@ -151,12 +151,12 @@ char **strtow(char *, char *);
 char **strtow2(char *, char);
 
 /* Declarations of functions defined in toem_realloc.c */
-char *_memset(char *, char, unsigned int);
-void ffree(char **);
-void *_realloc(void *, unsigned int, unsigned int);
+void *mem_fill(void *s, char b, unsigned int n);
+void free_strings(char **strings);
+void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size);
 
 /* Declarations of functions defined in toem_memory.c */
-int bfree(void **);
+int safe_free(void **ptr);
 
 /* Declarations of functions defined in toem_atoi.c */
 int interactive(info_t *);
