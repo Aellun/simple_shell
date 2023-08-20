@@ -3,7 +3,6 @@
 /**
  * _myexit - Exit the shell with a specified exit status.
  * @info: Pointer to the shell's info_t structure.
- *
  * Return: Always returns -2 to indicate shell termination.
  */
 int _myexit(info_t *info)
@@ -22,11 +21,9 @@ int _myexit(info_t *info)
 			_eputchar('\n');
 			return (1);
 		}
-
 		info->err_num = exit_status;
 		return (-2); /* Return -2 to signal shell termination */
 	}
-
 	info->err_num = -1;
 	return (-2); /* Return -2 to signal shell termination */
 }
@@ -34,8 +31,6 @@ int _myexit(info_t *info)
 /**
  * _mycd - Change the current working directory of the shell.
  * @info: Pointer to the shell's info_t structure.
- *
- * Return: Always returns 0.
  */
 int _mycd(info_t *info)
 {
@@ -43,35 +38,30 @@ int _mycd(info_t *info)
 	int chdir_ret;
 
 	cwd = getcwd(buffer, 1024);
-
 	if (!cwd)
-		_puts("TODO: >>getcwd failure emsg here<<\n"); /* TODO: Add error handling for getcwd failure */
-
-	if (!info->argv[1]) /* If no target directory is provided */
+		_puts("TODO: >>getcwd failure emsg here<<\n");/*Add err handling failure*/
+	if (!info->argv[1]) /* If no target directory provided */
 	{
 		target_dir = _getenv(info, "HOME=");
-
-		if (!target_dir)
-			chdir_ret = chdir((target_dir = _getenv(info, "PWD=")) ? target_dir : "/"); /* Change to HOME or PWD if available */
+		if (!target_dir)/*Change to HOME or PWD if available*/
+			chdir_ret = chdir((target_dir = _getenv(info, "PWD=")) ? target_dir : "/");
 		else
 			chdir_ret = chdir(target_dir); /* Change to the target directory */
 	}
-	else if (_strcmp(info->argv[1], "-") == 0) /* If target directory is "-" */
+	else if (_strcmp(info->argv[1], "-") == 0)/*If target directory is "-" */
 	{
-		if (!_getenv(info, "OLDPWD=")) /* If OLDPWD is not set */
+		if (!_getenv(info, "OLDPWD=")) /*If OLDPWD is not set*/
 		{
 			_puts(cwd);
 			_putchar('\n');
-			return (1); /* Return 1 to indicate successful command execution */
+			return (1);
 		}
-
 		_puts(_getenv(info, "OLDPWD="));
-		_putchar('\n');
-		chdir_ret = chdir((target_dir = _getenv(info, "OLDPWD=")) ? target_dir : "/"); /* Change to OLDPWD or "/" if available */
+		_putchar('\n');/*Change to OLDPWD or "/" if available*/
+		chdir_ret = chdir((target_dir = _getenv(info, "OLDPWD=")) ? target_dir : "/");
 	}
 	else
 		chdir_ret = chdir(info->argv[1]); /* Change to the specified directory */
-
 	if (chdir_ret == -1)
 	{
 		print_error(info, "can't cd to ");
@@ -81,15 +71,13 @@ int _mycd(info_t *info)
 	else
 	{
 		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024)); /* Update PWD and OLDPWD after successful change */
+		_setenv(info, "PWD", getcwd(buffer, 1024)); /*Update PWD and OLDPWD*/
 	}
 	return (0); /* Return 0 to indicate successful command execution */
 }
-
 /**
  * _myhelp - Display help information for the shell.
  * @info: Pointer to the shell's info_t structure.
- *
  * Return: Always returns 0.
  */
 int _myhelp(info_t *info)
