@@ -159,10 +159,10 @@ void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size);
 int safe_free(void **ptr);
 
 /* Declarations of functions defined in toem_atoi.c */
-int interactive(info_t *);
-int is_delim(char, char *);
-int _isalpha(int);
-int _atoi(char *);
+int interactive(const info_t *info);
+int is_delim(char c, const char *delim);
+int _isalpha(int c);
+int _atoi(const char *s);
 
 /* Declarations of functions defined in toem_errors1.c */
 int _erratoi(char *);
