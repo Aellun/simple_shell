@@ -77,10 +77,11 @@ int _putfd(char c, int fd)
  */
 int _putsfd(char *str, int fd)
 {
+	int k = 0;
+
 	if (!str)
 		return (0);
 
-	int k = 0;
 
 	/*Iterate over str & write each char specified fd*/
 	while (*str)
