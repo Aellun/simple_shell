@@ -52,7 +52,7 @@ void set_info(info_t *info, char **av)
  */
 void free_info(info_t *info, int all)
 {
-	ffree(info->argv);
+	free(info->argv);
 	info->argv = NULL;
 	info->path = NULL;
 
@@ -65,7 +65,7 @@ void free_info(info_t *info, int all)
 	free_list(&(info->env));
 	free_list(&(info->history));
 	free_list(&(info->alias));
-	ffree(info->environ);
+	free(info->environ);
 	info->environ = NULL;
 	free((void **)info->cmd_buf);
 
