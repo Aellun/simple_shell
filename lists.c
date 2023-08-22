@@ -91,18 +91,18 @@ list_t *add_node_end(list_t **head, const char *str, int num)
  */
 size_t print_list_str(const list_t *h)
 {
-	size_t i = 0;
+  size_t i = 0;
 
-	while (h)
-	{
-		_puts(h->str ? h->str : NULL_STR);
-		_puts("\n");
-		h = h->next;
-		i++;
-	}
-	return (i);
+  while (h != NULL) {
+    const char *str = h->str;
+    _puts(str ? str : "(null)");
+    _puts("\n");
+    h = h->next;
+    i++;
+  }
+
+  return i;
 }
-
 /**
  * delete_node_at_index - Deletes node at given index
  * @head: Address of pointer to first node
