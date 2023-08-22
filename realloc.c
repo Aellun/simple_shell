@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "shell.h"
 
 /**
  * mem_fill - fills memory with a constant byte
@@ -35,12 +33,12 @@ void free_strings(char **strings)
 
     while (*s)
     {
-        free(*s);
+        safe_free((void **)s);
         s++;
     }
 
     /* Free the pointer to the array of strings */
-    free(strings);
+    safe_free((void **)strings);
 }
 
 /**
@@ -57,7 +55,7 @@ void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size)
     if (new_size == 0)
     {
         /* Free the old block and return NULL */
-        free(ptr);
+        safe_free(&ptr);
         return NULL;
     }
 
@@ -68,7 +66,7 @@ void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size)
     if (new_ptr == NULL)
     {
         /* Free the old block and return NULL */
-        free(ptr);
+        safe_free(&ptr);
         return NULL;
     }
 
@@ -76,7 +74,7 @@ void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size)
     memcpy(new_ptr, ptr, old_size);
 
     /* Free the old block */
-    free(ptr);
+    safe_free(&ptr);
 
     /* Return the new block */
     return new_ptr;
