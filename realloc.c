@@ -1,4 +1,6 @@
-#include "shell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * mem_fill - fills memory with a constant byte
@@ -10,14 +12,16 @@
  */
 void *mem_fill(void *s, char b, unsigned int n)
 {
-	/* Iterate over the memory area and fill each byte with the constant byte */
-	unsigned int i;
+    /* Iterate over the memory area and fill each byte with the constant byte */
+    unsigned int i;
 
-	for (i = 0; i < n; i++)
-		((char *)s)[i] = b;
+    for (i = 0; i < n; i++)
+    {
+        *((char *)s + i) = b;
+    }
 
-	/* Return the pointer to the memory area */
-	return (s);
+    /* Return the pointer to the memory area */
+    return s;
 }
 
 /**
@@ -26,14 +30,17 @@ void *mem_fill(void *s, char b, unsigned int n)
  */
 void free_strings(char **strings)
 {
-	/* Iterate over the strings and free each one */
-	char **s = strings;
+    /* Iterate over the strings and free each one */
+    char **s = strings;
 
-	while (*s)
-		free(*s++);
+    while (*s)
+    {
+        free(*s);
+        s++;
+    }
 
-	/* Free the pointer to the array of strings */
-	free(strings);
+    /* Free the pointer to the array of strings */
+    free(strings);
 }
 
 /**
@@ -46,40 +53,31 @@ void free_strings(char **strings)
  */
 void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	/* Check if the new size is zero */
-	if (new_size == 0)
-	{
-		/* Free the old block */
-		free(ptr);
+    /* Check if the new size is zero */
+    if (new_size == 0)
+    {
+        /* Free the old block and return NULL */
+        free(ptr);
+        return NULL;
+    }
 
-		/* Return NULL */
-		return (NULL);
-	}
+    /* Allocate a new block of memory */
+    void *new_ptr = malloc(new_size);
 
-	/* Check if the new size is the same as the old size */
-	if (new_size == old_size)
-	{
-		/* Return the old block */
-		return (ptr);
-	}
+    /* Check if the allocation failed */
+    if (new_ptr == NULL)
+    {
+        /* Free the old block and return NULL */
+        free(ptr);
+        return NULL;
+    }
 
-	/* Allocate a new block of memory */
-	void *new_ptr = malloc(new_size);
+    /* Copy the data from the old block to the new block */
+    memcpy(new_ptr, ptr, old_size);
 
-	/* Check if the allocation failed */
-	if (new_ptr == NULL)
-	{
-		/* Return NULL */
-		return (NULL);
-	}
+    /* Free the old block */
+    free(ptr);
 
-	/* Copy the data from the old block to the new block */
-	memcpy(new_ptr, ptr, old_size);
-
-	/* Free the old block */
-	free(ptr);
-
-	/* Return the new block */
-	return (new_ptr);
+    /* Return the new block */
+    return new_ptr;
 }
-
