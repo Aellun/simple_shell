@@ -51,7 +51,8 @@ void free_strings(char **strings)
  */
 void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-    void *new_ptr;
+    void *new_ptr;  // Declare new_ptr before any statements
+
     /* Check if the new size is zero */
     if (new_size == 0)
     {
@@ -61,7 +62,7 @@ void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size)
     }
 
     /* Allocate a new block of memory */
-    void *new_ptr = malloc(new_size);
+    new_ptr = malloc(new_size);
 
     /* Check if the allocation failed */
     if (new_ptr == NULL)
