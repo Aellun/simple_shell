@@ -51,7 +51,7 @@ void free_strings(char **strings)
  */
 void *realloc_mem(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-    void *new_ptr;  // Declare new_ptr before any statements
+    void *new_ptr;
 
     /* Check if the new size is zero */
     if (new_size == 0)
