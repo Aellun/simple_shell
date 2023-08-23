@@ -12,9 +12,9 @@ char *_strcpy(char *dest, const char *src)
 	if (dest == src || src == NULL)
 		return dest;
 
-	int y;
+	int y = 0;
 
-	for (y = 0; src[y] != '\0'; y++)
+	for (src[y] != '\0'; y++)
 	{
 		dest[y] = src[y];
 	}
@@ -39,9 +39,9 @@ char *_strdup(const char *str)
 	if (ret == NULL)
 		return NULL;
 
-	size_t y;
+	size_t y = 0;
 
-	for (y = 0; y <= length; y++)
+	for (y <= length; y++)
 	{
 		ret[y] = str[y];
 	}
@@ -59,9 +59,9 @@ void _puts(const char *str)
 	if (str == NULL)
 		return;
 
-	int y;
+	int y = 0;
 
-	for (y = 0; str[y] != '\0'; y++)
+	for (str[y] != '\0'; y++)
 	{
 		_putchar(str[y]);
 	}
