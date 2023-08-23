@@ -1,31 +1,33 @@
 #include "shell.h"
 
 /**
- * _strcpy - reprints a str
- * @dest: where the str is copied to
- * @src: where the str is reprinted from
+ * _strcpy - Copies a string
+ * @dest: Destination where the string is copied to
+ * @src: Source string to be copied
  *
- * Return: ptr to dest
+ * Return: Pointer to destination string
  */
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *dest, const char *src)
 {
 	if (dest == src || src == NULL)
 		return (dest);
-	int y;
 
-	for (int y = 0; src[i] != '\0'; i++)
+	int y = 0;
+
+	while (src[y] != '\0')
 	{
 		dest[y] = src[y];
+		y++;
 	}
 	dest[y] = '\0';
 	return (dest);
 }
 
 /**
- * _strdup - copies the  str
- * @str: the str to be copied
+ * _strdup - Copies a string
+ * @str: The string to be copied
  *
- * Return: prt to the copied str
+ * Return: Pointer to the copied string, or NULL on failure
  */
 char *_strdup(const char *str)
 {
@@ -37,38 +39,42 @@ char *_strdup(const char *str)
 
 	if (ret == NULL)
 		return (NULL);
-	size_t y;
 
-	for (size_t y = 0; y <= length; y++)
+	size_t y = 0;
+
+	while (y <= length)
 	{
 		ret[y] = str[y];
+		y++;
 	}
 	return (ret);
 }
 
 /**
- * _puts - prints the input str
- * @str: the str to print
+ * _puts - Prints a string
+ * @str: The string to print
  *
- * Return: zero
+ * Return: void
  */
 void _puts(const char *str)
 {
 	if (str == NULL)
 		return;
 
-	for (int y = 0; str[i] != '\0'; y++)
+	int y = 0;
+
+	while (str[y] != '\0')
 	{
 		_putchar(str[y]);
+		y++;
 	}
 }
 
 /**
- * _putchar - signs the char c to stdout
- * @c: The char to sign
+ * _putchar - Writes a character to stdout
+ * @c: The character to write
  *
- * Return: 1 on sucuess
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: 1 on success, -1 on error
  */
 int _putchar(char c)
 {
