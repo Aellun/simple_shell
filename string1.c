@@ -11,9 +11,10 @@ char *_strcpy(char *dest, char *src)
 {
 	if (dest == src || src == NULL)
 		return (dest);
+
 	int y;
 
-	for (int y = 0; src[y] != '\0'; y++)
+	for (y = 0; src[y] != '\0'; y++)
 	{
 		dest[y] = src[y];
 	}
@@ -22,10 +23,10 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _strdup - copies the  str
+ * _strdup - copies the str
  * @str: the str to be copied
  *
- * Return: prt to the copied str
+ * Return: ptr to the copied str
  */
 char *_strdup(const char *str)
 {
@@ -37,9 +38,10 @@ char *_strdup(const char *str)
 
 	if (ret == NULL)
 		return (NULL);
+
 	size_t y;
 
-	for (size_t y = 0; y <= length; y++)
+	for (y = 0; y <= length; y++)
 	{
 		ret[y] = str[y];
 	}
@@ -50,14 +52,16 @@ char *_strdup(const char *str)
  * _puts - prints the input str
  * @str: the str to print
  *
- * Return: zero
+ * Return: void
  */
 void _puts(const char *str)
 {
 	if (str == NULL)
 		return;
 
-	for (int y = 0; str[i] != '\0'; y++)
+	int y;
+
+	for (y = 0; str[y] != '\0'; y++)
 	{
 		_putchar(str[y]);
 	}
@@ -67,8 +71,7 @@ void _puts(const char *str)
  * _putchar - signs the char c to stdout
  * @c: The char to sign
  *
- * Return: 1 on sucuess
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: 1 on success, -1 on error
  */
 int _putchar(char c)
 {
@@ -86,4 +89,3 @@ int _putchar(char c)
 
 	return (1);
 }
-
