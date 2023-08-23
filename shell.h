@@ -136,9 +136,9 @@ int _strcmp(char *, char *);
 char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
 
-/* Declarations of functions defined in toem_string1.c */
-char *_strcpy(char *, char *);
-char *_strdup(const char *);
+/* Declarations of functions defined in string1.c */
+char *_strcpy(char *dest, const char *src);
+char *_strdup(const char *str);
 void _puts(const char *str);
 int _putchar(char c);
 
@@ -148,8 +148,8 @@ char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
 
 /* Declarations of functions defined in toem_tokenizer.c */
-char **strtow(char *, char *);
 char **strtow2(char *, char);
+char **strtow(const char *str, const char *delim);
 
 /* Declarations of functions defined in toem_realloc.c */
 void *mem_fill(void *s, char b, unsigned int n);

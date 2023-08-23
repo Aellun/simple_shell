@@ -1,119 +1,94 @@
 #include "shell.h"
 
 /**
- * count_words - count the number of words in a string
- * @str: the input string
- * @delim: the delimiter string
- * Return: number of words
+ * **strtow - breaks a str into words. Repeat delimiters are ignored
+ * @str: the inputted string
+ * @d: the delimiter string
+ * Return: a ptr to an array of strings, or NULL on not success
  */
-static int count_words(const char *str, const char *delim)
+char **strtow(char *str, char *d)
 {
-	int count = 0;
-	int inside_word = 0;
+	int x, y, z, n, num_words = 0;
+	char **s;
 
-	while (*str)
-	{
-		if (!strchr(delim, *str))
-		{
-			if (!inside_word)
-			{
-				inside_word = 1;
-				count++;
-			}
-		}
-		else
-		{
-			inside_word = 0;
-		}
-		str++;
-	}
-
-	return (count);
-}
-
-/**
- * get_word_length - get the length of a word
- * @str: the input string
- * @delim: the delimiter string
- * Return: length of word
- */
-static int get_word_length(const char *str, const char *delim)
-{
-	int length = 0;
-
-	while (*str && !strchr(delim, *str))
-	{
-		length++;
-		str++;
-	}
-
-	return (length);
-}
-
-/**
- * copy_word - copy a word from source to destination
- * @src: the source string
- * @dst: the destination string
- * @delim: the delimiter string
- */
-static void copy_word(const char *src, char *dst, const char *delim)
-{
-	while (*src && !strchr(delim, *src))
-	{
-		*dst = *src;
-		src++;
-		dst++;
-	}
-	*dst = '\0';
-}
-
-/**
- * **strtow - break a string into words. Repeat delimiters are ignored
- * @str: the input string
- * @delim: the delimiter string
- * Return: returns a pointer to an array of strings, on failure, NULL
- */
-char **strtow(const char *str, const char *delim)
-{
 	if (str == NULL || str[0] == '\0')
 		return (NULL);
-
-	if (delim == NULL)
-		delim = " ";
-
-	int num_words = count_words(str, delim);
-
+	if (!d)
+		d = " ";
+	for (x = 0; str[x] != '\0'; x++)
+		if (!is_delim(str[x], d) && (is_delim(str[x + 1], d) || !str[x + 1]))
+			num_words++;
 	if (num_words == 0)
 		return (NULL);
-	char **words = malloc((num_words + 1) * sizeof(char *));
-
-	if (words == NULL)
+	s = malloc((1 + num_words) * sizeof(char *));
+	if (!s)
 		return (NULL);
-	int word_index = 0;
-
-	while (*str)
+	for (x = 0, y = 0; y < num_words; y++)
 	{
-		while (*str && strchr(delim, *str))
-			str++;
-
-		if (*str)
+		while (is_delim(str[x], d))
+			x++;
+		z = 0;
+		while (!is_delim(str[x + z], d) && str[x + z])
+			z++;
+		s[y] = malloc((z + 1) * sizeof(char));
+		if (!s[y])
 		{
-			int word_length = get_word_length(str, delim);
-
-			words[word_index] = malloc(word_length + 1);
-			if (words[word_index] == NULL)
-			{
-				for (int i = 0; i < word_index; i++)
-					free(words[i]);
-				free(words);
-				return (NULL);
-			}
-			copy_word(str, words[word_index], delim);
-			str += word_length;
-			word_index++;
+			for (z = 0; z < y; z++)
+				free(s[z]);
+			free(s);
+			return (NULL);
 		}
+		for (n = 0; n < z; n++)
+			s[y][n] = str[x++];
+
+		s[y][n] = '\0';
 	}
-	words[word_index] = NULL;
-	return (words);
+	s[y] = NULL;
+	return (s);
+}
+
+/**
+ * **strtow2 - breaks a string into words
+ * @str: the inputted string
+ * @d: the delimiter
+ * Return: a ptr to an array of str, or NULL on failure
+ */
+char **strtow2(char *str, char d)
+{
+	int x, y, z, n, num_words = 0;
+	char **s;
+
+	if (str == NULL || str[0] == '\0')
+		return (NULL);
+	for (x = 0; str[x] != '\0'; x++)
+		if ((str[x] != d && str[x + 1] == d) ||
+				(str[x] != d && !str[x + 1]) || str[x + 1] == d)
+			num_words++;
+	if (num_words == 0)
+		return (NULL);
+	s = malloc((1 + num_words) * sizeof(char *));
+	if (!s)
+		return (NULL);
+	for (x = 0, y = 0; y < num_words; y++)
+	{
+		while (str[x] == d && str[x] != d)
+			x++;
+		z = 0;
+		while (str[x + z] != d && str[x + z] && str[x + z] != d)
+			z++;
+		s[y] = malloc((z + 1) * sizeof(char));
+		if (!s[y])
+		{
+			for (z = 0; z < y; z++)
+				free(s[z]);
+			free(s);
+			return (NULL);
+		}
+		for (n = 0; n < z; n++)
+			s[y][n] = str[x++];
+		s[y][n] = '\0';
+	}
+	s[y] = NULL;
+	return (s);
 }
 

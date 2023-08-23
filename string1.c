@@ -9,10 +9,10 @@
  */
 char *_strcpy(char *dest, const char *src)
 {
+	int y = 0;
+
 	if (dest == src || src == NULL)
 		return (dest);
-
-	int y = 0;
 
 	while (src[y] != '\0')
 	{
@@ -31,16 +31,15 @@ char *_strcpy(char *dest, const char *src)
  */
 char *_strdup(const char *str)
 {
-	if (str == NULL)
-		return (NULL);
-
+	size_t y = 0;
 	size_t length = strlen(str);
 	char *ret = malloc(length + 1);
 
-	if (ret == NULL)
+	if (str == NULL)
 		return (NULL);
 
-	size_t y = 0;
+	if (ret == NULL)
+		return (NULL);
 
 	while (y <= length)
 	{
@@ -58,10 +57,10 @@ char *_strdup(const char *str)
  */
 void _puts(const char *str)
 {
+	int y = 0;
+
 	if (str == NULL)
 		return;
-
-	int y = 0;
 
 	while (str[y] != '\0')
 	{
