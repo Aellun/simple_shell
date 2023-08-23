@@ -1,16 +1,16 @@
 #include "shell.h"
 
 /**
- * _strcpy - reprints a str
- * @dest: where the str is copied to
- * @src: where the str is reprinted from
+ * _strcpy - Copies a string
+ * @dest: Destination where the string is copied to
+ * @src: Source string to be copied
  *
- * Return: ptr to dest
+ * Return: Pointer to destination string
  */
-char *_strcpy(char *dest, char *src)
+char *_strcpy(char *dest, const char *src)
 {
 	if (dest == src || src == NULL)
-		return (dest);
+		return dest;
 
 	int y;
 
@@ -19,25 +19,25 @@ char *_strcpy(char *dest, char *src)
 		dest[y] = src[y];
 	}
 	dest[y] = '\0';
-	return (dest);
+	return dest;
 }
 
 /**
- * _strdup - copies the str
- * @str: the str to be copied
+ * _strdup - Copies a string
+ * @str: The string to be copied
  *
- * Return: ptr to the copied str
+ * Return: Pointer to the copied string, or NULL on failure
  */
 char *_strdup(const char *str)
 {
 	if (str == NULL)
-		return (NULL);
+		return NULL;
 
 	size_t length = strlen(str);
 	char *ret = malloc(length + 1);
 
 	if (ret == NULL)
-		return (NULL);
+		return NULL;
 
 	size_t y;
 
@@ -45,12 +45,12 @@ char *_strdup(const char *str)
 	{
 		ret[y] = str[y];
 	}
-	return (ret);
+	return ret;
 }
 
 /**
- * _puts - prints the input str
- * @str: the str to print
+ * _puts - Prints a string
+ * @str: The string to print
  *
  * Return: void
  */
@@ -68,8 +68,8 @@ void _puts(const char *str)
 }
 
 /**
- * _putchar - signs the char c to stdout
- * @c: The char to sign
+ * _putchar - Writes a character to stdout
+ * @c: The character to write
  *
  * Return: 1 on success, -1 on error
  */
@@ -87,5 +87,6 @@ int _putchar(char c)
 	if (c != BUF_FLUSH)
 		buf[y++] = c;
 
-	return (1);
+	return 1;
 }
+
