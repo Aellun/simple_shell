@@ -139,8 +139,8 @@ char *_strcat(char *, char *);
 /* Declarations of functions defined in toem_string1.c */
 char *_strcpy(char *, char *);
 char *_strdup(const char *);
-void _puts(const char *str)
-int _putchar(char);
+void _puts(const char *str);
+int _putchar(char c);
 
 /* Declarations of functions defined in toem_exits.c */
 char *_strncpy(char *, char *, int);
