@@ -139,7 +139,7 @@ char *_strcat(char *, char *);
 /* Declarations of functions defined in toem_string1.c */
 char *_strcpy(char *, char *);
 char *_strdup(const char *);
-void _puts(char *);
+void _puts(const char *str)
 int _putchar(char);
 
 /* Declarations of functions defined in toem_exits.c */
