@@ -149,7 +149,7 @@ char *_strchr(char *, char);
 
 /* Declarations of functions defined in toem_tokenizer.c */
 char **strtow2(char *, char);
-char **strtow(const char *str, const char *delim);
+char **strtow(char *str, char *d);
 
 /* Declarations of functions defined in toem_realloc.c */
 void *mem_fill(void *s, char b, unsigned int n);
