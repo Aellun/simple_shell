@@ -5,12 +5,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <limits.h>
 #include <fcntl.h>
-#include <errno.h>
 
 /* Buffer sizes for reading and writing */
 #define READ_BUF_SIZE 1024
@@ -61,13 +61,13 @@ typedef struct liststr
  * @err_num: Error code for exit() calls.
  * @linecount_flag: Flag to count this line of input.
  * @fname: The program filename.
+ * @status: Return status of the last executed command.
  * @env: Linked list containing a local copy of environ.
+ * @cmd_buf_type: Type of command chaining (CMD_OR, CMD_AND, CMD_CHAIN).
  * @history: Linked list for history.
  * @alias: Linked list for aliases.
  * @env_changed: Flag indicating if environ was changed.
- * @status: Return status of the last executed command.
  * @cmd_buf: Address of the pointer to the cmd buffer for chaining.
- * @cmd_buf_type: Type of command chaining (CMD_OR, CMD_AND, CMD_CHAIN).
  * @readfd: File descriptor for reading line input.
  * @histcount: History line number count.
  * @environ: External environment variable array
@@ -169,7 +169,6 @@ int _atoi(const char *s);
 int _erratoi(char *);
 void print_error(info_t *, char *);
 int print_d(int, int);
-char *convert_number(long int, int, int);
 void remove_comments(char *);
 
 /* Declarations of functions defined in toem_builtin.c */
@@ -178,19 +177,19 @@ int _mycd(info_t *);
 int _myhelp(info_t *);
 
 /* Declarations of functions defined in toem_builtin1.c */
-int _myhistory(info_t *);
 int _myalias(info_t *);
-
+int _myhistory(info_t *);
+char *convert_number(long int, int, int);
 /* Declarations of functions defined in toem_getline.c */
-ssize_t get_input(info_t *);
+void free_info(info_t *, int);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
 
 /* Declarations of functions defined in toem_getinfo.c */
 void clear_info(info_t *);
 void set_info(info_t *, char **);
-void free_info(info_t *, int);
-
+ssize_t get_input(info_t *);
+size_t print_list(const list_t *);
 /* Declarations of functions defined in toem_environ.c */
 char *_getenv(info_t *, const char *);
 int _myenv(info_t *);
@@ -213,14 +212,12 @@ int renumber_history(info_t *info);
 /* Declarations of functions defined in toem_lists.c */
 list_t *add_node(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
-size_t print_list_str(const list_t *);
 int delete_node_at_index(list_t **, unsigned int);
 void free_list(list_t **);
 
 /* Declarations of functions defined in toem_lists1.c */
 size_t list_len(const list_t *);
 char **list_to_strings(list_t *);
-size_t print_list(const list_t *);
 list_t *node_starts_with(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
 
@@ -230,5 +227,5 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
-
+size_t print_list_str(const list_t *);
 #endif
