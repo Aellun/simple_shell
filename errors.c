@@ -1,93 +1,79 @@
 #include "shell.h"
 
 /**
- * _eputs - writes an input str to stderr
- * @str: The written str
- *
- * Return: Nothing.
+ * _eputs - displays an input str
+ * @str: tthe written str
+ * Return: Nothing
  */
 void _eputs(char *str)
 {
-	int k = 0;
+	int m = 0;
 
 	if (!str)
 		return;
-
-	while (str[k] != '\0') /*Iterate through the string characters*/
+	while (str[m] != '\0')
 	{
-		_eputchar(str[k]); /*Print each character to stderr*/
-		k++;
+		_eputchar(str[i]);
+		m++;
 	}
 }
-
 /**
- * _eputchar - Writes the c to stderr
- * @c: The printed char
- *
- * Return:  sets errno while -1 on error and 1 on success
+ * _eputchar - writes the character c to stderr
+ * @c: the written char
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
 int _eputchar(char c)
 {
-	static int k;
+	static int i;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || k >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(2, buf, k); /*Write buffered characters to stderr*/
-		k = 0;
+		write(2, buf, i);
+		i = 0;
 	}
-
 	if (c != BUF_FLUSH)
-		buf[k++] = c; /*Buffer the character*/
-
+		buf[i++] = c;
 	return (1);
 }
-
 /**
- * _putfd - Writes c char to the given fd
- * @c: The char to be written
- * @fd: The destination where char is written to
- *
- * Return:  sets errno and return 1 on success and -1 otherwise
+ * _putfd - displays the char c to the  given fd
+ * @c: The character to b written
+ * @fd: the dest where the char is written to
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
 int _putfd(char c, int fd)
 {
-	static int k;
+	static int i;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || k >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(fd, buf, k); /*Write buffered characters to the specified fd*/
-		k = 0;
+		write(fd, buf, i);
+		i = 0;
 	}
-
-	/*Add character to the buffer if not BUF_FLUSH*/
 	if (c != BUF_FLUSH)
-		buf[k++] = c;
-
+		buf[i++] = c;
 	return (1);
 }
 
 /**
- * _putsfd - writes input str to the fd
- * @str: the written str
- * @fd: The fd written to
- *
- * Return: char number
+ * _putsfd - displays an input str
+ * @str: the str  printed
+ * @fd: the dest to write to
+ * Return: the number of chars put
  */
 int _putsfd(char *str, int fd)
 {
-	int k = 0;
+	int m = 0;
 
 	if (!str)
 		return (0);
-
-
-	/*Iterate over str & write each char specified fd*/
 	while (*str)
 	{
-		k += _putfd(*str++, fd);
+		m += _putfd(*str++, fd);
 	}
-
-	return (k);
+	return (m);
 }
