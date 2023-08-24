@@ -236,4 +236,5 @@ int replace_vars(info_t *info);
 int is_chain(info_t *, char *, size_t *);
 void check_chain(info_t *, char *, size_t *, size_t, size_t);
 list_t *find_node_by_prefix(list_t *head, char *prefix, char delimiter);
+int replace_variables(info_t *info);
 #endif
