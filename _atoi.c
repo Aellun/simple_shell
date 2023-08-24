@@ -1,78 +1,69 @@
 #include "shell.h"
 
 /**
- * interactive - Check if the shell is in interactive mode.
- * @info: Pointer to the shell's info_t structure.
+ * interactive - is true when shell is interative
+ * @info: struct address
  *
- * Return: 1 true, or 0 if otherwise.
+ * Return: 1 if true and 0 otherwise
  */
-int interactive(const info_t *info)
+int interactive(info_t *info)
 {
-/**
- * Checks if shell is running in interactive mode
- * and if fd is in the given range
- */
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
-
 /**
- * is_delim - Check if a character is a delimiter.
- * @c: The character to check.
- * @delim: The delimiter string.
- *
- * Return: 1 if c is a delimiter, 0 otherwise.
+ * is_delim - look if  char is delim
+ * @c: char being checked
+ * @delim: the delim str
+ * Return: 1 if successful 0 otherwise
  */
-int is_delim(char c, const char *delim)
+int is_delim(char c, char *delim)
 {
 	while (*delim)
-	{
-		/*Compare the current char with each delimiter in the delimiter string*/
-		if (*delim == c)
+		if (*delim++ == c)
 			return (1);
-		delim++;
-	}
 	return (0);
 }
-
 /**
- * _isalpha - Check if a character is an alphabetic character.
- * @c: The character to check.
- *
- * Return: 1 if c is an alphabetic character, 0 otherwise.
+ * _isalpha - looks for alphabetic char
+ * @c: The char to input
+ * Return: 1 if true 0 otherwise
  */
 int _isalpha(int c)
 {
-	/*Check if the char is within range of lower or upper case alphabetic char*/
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
 }
-
 /**
- * _atoi - Convert a string to an integer.
- * @s: The string to be converted.
- *
- * Return: 0 if no numbers in string, the converted number otherwise.
+ * _atoi - turn a str to an int
+ * @s: str being turned
+ * Return: 0 if false
  */
-int _atoi(const char *s)
+int _atoi(char *s)
 {
-	int k = 0;
-	int sign = 1;
-	int result = 0;
+	int y, sign = 1, flag = 0, output;
+	unsigned int result = 0;
 
-	/* Handle negative numbers by checking for a leading '-' character. */
-	if (s[k] == '-')
+	for (y = 0; s[y] != '\0' && flag != 2; y++)
 	{
-		sign = -1;
-		k++;
+		if (s[y] == '-')
+			sign *= -1;
+
+		if (s[y] >= '0' && s[y] <= '9')
+		{
+			flag = 1;
+			result *= 10;
+			result += (s[y] - '0');
+		}
+		else if (flag == 1)
+			flag = 2;
 	}
 
-	/* Convert the string of digits to an integer. */
-	while (s[k] >= '0' && s[k] <= '9')
-	{
-		result = result * 10 + (s[k] - '0');
-		k++;
-	}
+	if (sign == -1)
+		output = -result;
+	else
+		output = result;
 
-	/* Apply the sign and return the final result. */
-	return (result * sign);
+	return (output);
 }
-
