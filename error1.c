@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * _erratoi - Converts a string to an integer.
- * @s: The string to be converted.
+ * _erratoi - turns str to an int
+ * @s: The converted str
  *
- * Return: Converted number if valid, -1 on error.
+ * Return: -1 on error.
  */
 int _erratoi(char *s)
 {
@@ -29,9 +29,9 @@ int _erratoi(char *s)
 }
 
 /**
- * print_error - Prints an error message to stderr.
+ * print_error -writes an err msg to stderr.
  * @info: The parameter and return info struct.
- * @estr: String containing specified error type.
+ * @estr: Str containing specified err
  */
 void print_error(info_t *info, char *estr)
 {
@@ -45,11 +45,11 @@ void print_error(info_t *info, char *estr)
 }
 
 /**
- * print_d - Prints a decimal (integer) number to a specified file descriptor.
- * @input: The input number to be printed.
- * @fd: The file descriptor to write to.
+ * print_d - writes an in number to a given fd
+ * @input: The number to be written
+ * @fd: The destination fd
  *
- * Return: Number of characters printed.
+ * Return: charcters written in numbers
  */
 int print_d(int input, int fd)
 {
@@ -84,12 +84,12 @@ int print_d(int input, int fd)
 }
 
 /**
- * convert_number - Converts a number to a string rep in a given base.
- * @num: The number to be converted.
- * @base: The base for conversion (e.g., decimal, hexadecimal).
- * @flags: Argument flags.
+ * convert_number - turns num to str rep in a given base.
+ * @num: The num to turn
+ * @base: The base for conversion like decimal, hexadecimal
+ * @flags: Arg flag
  *
- * Return: The string representation of the converted number.
+ * Return: The str conveted
  */
 char *convert_number(long int num, int base, int flags)
 {
@@ -122,8 +122,8 @@ char *convert_number(long int num, int base, int flags)
 }
 
 /**
- * remove_comments - Replaces the first instance of '#' with '\0'.
- * @buf: The address of the string to modify.
+ * remove_comments -exchanges the 1st occurance of '#' with '\0'.
+ * @buf: The address of the str to modify.
  */
 void remove_comments(char *buf)
 {

@@ -1,10 +1,9 @@
 #include "shell.h"
 
 /**
- * _myhistory - Displays the history list with line numbers.
- * @info: Pointer to the shell's info_t structure.
- *
- * Return: Always 0 on success
+ * _myhistory -shows hist list arranged in numbers
+ * @info: Ptr to shell-info_t struct
+ * Return: 0 on success
  */
 int _myhistory(info_t *info)
 {
@@ -13,11 +12,10 @@ int _myhistory(info_t *info)
 }
 
 /**
- * unset_alias - Removes an alias from the alias list.
- * @info: Pointer to the shell's info_t structure.
- * @str: The string alias.
- *
- * Return: 0 on success, 1 on error.
+ * unset_alias - terminate aliases from alias list
+ * @info: ptr to info_t of the  struct
+ * @str: The str alias
+ * Return:  1 on error and 0 on success
  */
 int unset_alias(info_t *info, char *str)
 {
@@ -36,11 +34,11 @@ int unset_alias(info_t *info, char *str)
 }
 
 /**
- * set_alias - Sets or updates an alias in the alias list.
- * @info: Pointer to the shell's info_t structure.
- * @str: The string alias.
+ * set_alias - displays and update alias in the list
+ * @info: Ptr to the shell-info struct
+ * @str: The str alias.
  *
- * Return: 0 on success, 1 on error.
+ * Return: on error 1 and 0 on success
  */
 int set_alias(info_t *info, char *str)
 {
@@ -57,10 +55,10 @@ int set_alias(info_t *info, char *str)
 }
 
 /**
- * print_alias - Prints an alias string.
- * @node: Pointer to the alias node.
+ * print_alias - writes an alias str
+ * @node: node ptr to an alias
  *
- * Return: 0 on success, 1 on error.
+ * Return: on error 0 and 1 on success
  */
 int print_alias(list_t *node)
 {
@@ -80,8 +78,8 @@ int print_alias(list_t *node)
 }
 
 /**
- * _myalias - Handles the alias built-in command.
- * @info: Pointer to the shell's info_t structure.
+ * _myalias - builtin command handler
+ * @info: Ptr to shel- info_t struct
  *
  * Return: Always 0.
  */

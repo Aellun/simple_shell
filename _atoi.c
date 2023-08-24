@@ -4,13 +4,13 @@
  * interactive - Check if the shell is in interactive mode.
  * @info: Pointer to the shell's info_t structure.
  *
- * Return: 1 if it is in interactive mode, or 0 if otherwise.
+ * Return: 1 true, or 0 if otherwise.
  */
 int interactive(const info_t *info)
 {
 /**
- * Check if the shell is running interactively
- * and if the read file descriptor is within a valid range.
+ * Checks if shell is running in interactive mode
+ * and if fd is in the given range
  */
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }

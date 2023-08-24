@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * _myexit - Exit the shell with a specified exit status.
- * @info: Pointer to the shell's info_t structure.
- * Return: Always returns -2 to indicate shell termination.
+ * _myexit - Exit shell with a given status
+ * @info: ptr to the shell info_t struct.
+ * Return: Always returns -2 to show shell terminiation
  */
 int _myexit(info_t *info)
 {
@@ -29,8 +29,8 @@ int _myexit(info_t *info)
 }
 
 /**
- * _mycd - Change the current working directory of the shell.
- * @info: Pointer to the shell's info_t structure.
+ * _mycd - Changes shell current dir to another
+ * @info: ptr to shell info_t struct
  */
 int _mycd(info_t *info)
 {
@@ -76,9 +76,9 @@ int _mycd(info_t *info)
 	return (0); /* Return 0 to indicate successful command execution */
 }
 /**
- * _myhelp - Display help information for the shell.
- * @info: Pointer to the shell's info_t structure.
- * Return: Always returns 0.
+ * _myhelp - show shell-help info
+ * @info: Ptr to the struc of the shell
+ * Return: returns 0
  */
 int _myhelp(info_t *info)
 {
