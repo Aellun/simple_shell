@@ -1,83 +1,76 @@
 #include "shell.h"
 
 /**
- * _myenv - Print the current environment.
- * @info: Pointer to the shell's info_t structure.
- *
- * Return: Always 0.
+ * _myenv - displays the current environment
+ * @info: Struct having possible arg. Used to maintain
+ *          constant function prototype.
+ * Return: 0 on success
  */
 int _myenv(info_t *info)
 {
-	print_list(info->env);
+	print_list_str(info->env);
 	return (0);
 }
-
 /**
- * _getenv - Get the value of an environment variable.
- * @info: Pointer to the shell's info_t structure.
- * @name: Name of the environment variable.
+ * _getenv - fetch value of the environ var
+ * @info: Struct having potential arg Used to maintain
+ * @name: name of the env var
  *
- * Return: The value of the environment variable or NULL if not found.
+ * Return: the value
  */
 char *_getenv(info_t *info, const char *name)
 {
 	list_t *node = info->env;
-	char *p;
+	char *y;
 
 	while (node)
 	{
-		p = starts_with(node->str, name);
-		if (p && *p)
-			return (p);
+		y = starts_with(node->str, name);
+		if (y && *y)
+			return (y);
 		node = node->next;
 	}
 	return (NULL);
 }
-
 /**
- * _mysetenv - Initialize a new environment variable or modify an existing one.
- * @info: Pointer to the shell's info_t structure.
- *
- * Return: Always 0.
+ * _mysetenv - Initialize or modify a new environment var,
+ * @info: struct having possible arg for const funct prototype
+ *  Return: Always 0 on success
  */
 int _mysetenv(info_t *info)
 {
 	if (info->argc != 3)
 	{
-		_eputs("Incorrect number of arguments\n");
+		_eputs("Incorrect number of arguements\n");
 		return (1);
 	}
 	if (_setenv(info, info->argv[1], info->argv[2]))
 		return (0);
 	return (1);
 }
-
 /**
- * _myunsetenv - Remove an environment variable.
- * @info: Pointer to the shell's info_t structure.
- *
- * Return: Always 0.
+ * _myunsetenv - terminate var for environ
+ * @info: struct having possible arg for const funct prototype
+ * Return: Always 0 on success
  */
 int _myunsetenv(info_t *info)
 {
-	int i;
+	int m;
 
 	if (info->argc == 1)
 	{
-		_eputs("Too few arguments.\n");
+		_eputs("Too few arguements.\n");
 		return (1);
 	}
-	for (i = 1; i < info->argc; i++)
-		_unsetenv(info, info->argv[i]);
+	for (m = 1; m <= info->argc; m++)
+		_unsetenv(info, info->argv[m]);
 
 	return (0);
 }
-
 /**
- * populate_env_list - Populate the environment linked list.
- * @info: Pointer to the shell's info_t structure.
- *
- * Return: Always 0.
+ * populate_env_list - populates env linked list
+ * @info: struct having possible arg for const funct prototype
+ * Return: Always 0
  */
 int populate_env_list(info_t *info)
 {
@@ -89,4 +82,3 @@ int populate_env_list(info_t *info)
 	info->env = node;
 	return (0);
 }
-
