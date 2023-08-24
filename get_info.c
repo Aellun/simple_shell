@@ -43,7 +43,8 @@ void set_info(info_t *info, char **av)
 
 	replace_alias(info);
 	replace_vars(info);
-}
+
+	}
 
 /**
  * free_info - Frees memory associated with info_t struct fields

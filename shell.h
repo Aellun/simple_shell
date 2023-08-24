@@ -221,12 +221,19 @@ char **list_to_strings(list_t *);
 list_t *node_starts_with(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
 
-/**Declarations of functions defined in toem_vars.c
-*int is_chain(info_t *, char *, size_t *);
-*void check_chain(info_t *, char *, size_t *, size_t, size_t);
-*int replace_alias(info_t *);
-*int replace_vars(info_t *);
-*int replace_string(char **, char *);
-*size_t print_list_str(const list_t *);
-*/
+/**Declarations of functions defined in toem_vars.c*/
+int is_chain(info_t *, char *, size_t *);
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
+int replace_alias(info_t *);
+int replace_vars(info_t *);
+int replace_string(char **, char *);
+size_t print_list_str(const list_t *);
+
+
+/* Declarations of functions defined in toem_vars.c */
+int replace_alias(info_t *info);
+int replace_vars(info_t *info);
+int is_chain(info_t *, char *, size_t *);
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
+list_t *find_node_by_prefix(list_t *head, char *prefix, char delimiter);
 #endif
