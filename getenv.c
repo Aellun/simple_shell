@@ -1,10 +1,9 @@
 #include "shell.h"
 
 /**
- * get_environ - display str duplicate array environ
- * @info: Struct possible arg ude to maintain.
- *        function prototype constants
- * Return: Ptr to environ array str
+ * get_environ - display str duplicate array  environ
+ * @info: Structure having  possible arg.
+ * Return: Always 0
  */
 char **get_environ(info_t *info)
 {
@@ -16,14 +15,11 @@ char **get_environ(info_t *info)
 
 	return (info->environ);
 }
-
 /**
- * _unsetenv - terminate environ var
- * @info: Struct having possible arg
- *         Used to maintain constant function prototype.
+ * _unsetenv - terminate an env var
+ * @info: struct having possible  arg.
+ *  Return: 1 on delete, 0 otherwise
  * @var: the str env var property
- *
- * Return: 1 on delete, 0 otherwise
  */
 int _unsetenv(info_t *info, char *var)
 {
@@ -51,19 +47,17 @@ int _unsetenv(info_t *info, char *var)
 }
 
 /**
- * _setenv - Initialize a new or modify  environ var,
- * @info: Structure containing potential arguments.
- *        Used to maintain constant function prototype.
- * @var: the string env var property
- * @value: the string env var value
- *
- * Return: Always 0
+ * _setenv - allocate or modify a new environment var,
+ * @info: Struct having possible args.
+ * @var: the str env var property
+ * @value: the str env var value
+ *  Return: Always 0
  */
 int _setenv(info_t *info, char *var, char *value)
 {
 	char *buf = NULL;
 	list_t *node;
-	char *p;
+	char *y;
 
 	if (!var || !value)
 		return (0);
@@ -78,7 +72,7 @@ int _setenv(info_t *info, char *var, char *value)
 	while (node)
 	{
 		p = starts_with(node->str, var);
-		if (p && *p == '=')
+		if (y && *y == '=')
 		{
 			free(node->str);
 			node->str = buf;
