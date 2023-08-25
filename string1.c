@@ -1,94 +1,79 @@
 #include "shell.h"
-
 /**
- * _strcpy - Copies a string
- * @dest: Destination where the string is copied to
- * @src: Source string to be copied
- *
- * Return: Pointer to destination string
+ * _strcpy -duplicate str from source to specified dest
+ * @dest: the dest where the str is being duplicated to
+ * @src: source of the str
+ * Return: ptr to dest
  */
-char *_strcpy(char *dest, const char *src)
+char *_strcpy(char *dest, char *src)
 {
-	int y = 0;
+	int d = 0;
 
-	if (dest == src || src == NULL)
+	if (dest == src || src == 0)
 		return (dest);
-
-	while (src[y] != '\0')
+	while (src[d])
 	{
-		dest[y] = src[y];
-		y++;
+		dest[d] = src[d];
+		d++;
 	}
-	dest[y] = '\0';
+	dest[d] = 0;
 	return (dest);
 }
-
 /**
- * _strdup - Copies a string
- * @str: The string to be copied
- *
- * Return: Pointer to the copied string, or NULL on failure
+ * _strdup - main function for str duplication
+ * @str: the str being copied
+ * Return: ptr to the str being copied
  */
 char *_strdup(const char *str)
 {
-	size_t y = 0;
-	size_t length = strlen(str);
-	char *ret = malloc(length + 1);
+	int length = 0;
+	char *ret;
 
 	if (str == NULL)
 		return (NULL);
-
-	if (ret == NULL)
+	while (*str++)
+		length++;
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
 		return (NULL);
-
-	while (y <= length)
-	{
-		ret[y] = str[y];
-		y++;
-	}
+	for (length++; length--;)
+		ret[length] = *--str;
 	return (ret);
 }
-
 /**
- * _puts - Prints a string
- * @str: The string to print
- *
- * Return: void
+ * _puts - display terminated ('\0') str to the std/o
+ * @str: str being displayed
+ * Return: Nothing
  */
-void _puts(const char *str)
+void _puts(char *str)
 {
-	int y = 0;
+	int n = 0;
 
-	if (str == NULL)
+	if (!str)
 		return;
-
-	while (str[y] != '\0')
+	while (str[n] != '\0')
 	{
-		_putchar(str[y]);
-		y++;
+		_putchar(str[n]);
+		n++;
 	}
 }
-
 /**
- * _putchar - Writes a character to stdout
- * @c: The character to write
- *
- * Return: 1 on success, -1 on error
+ * _putchar - writes the char c to std/o
+ * @c: The char being to writen
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
  */
 int _putchar(char c)
 {
-	static int y;
+	static int i;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || y >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
-		write(1, buf, y);
-		y = 0;
+		write(1, buf, i);
+		i = 0;
 	}
-
 	if (c != BUF_FLUSH)
-		buf[y++] = c;
-
+		buf[i++] = c;
 	return (1);
 }
-

@@ -1,29 +1,28 @@
 #include "shell.h"
-
 /**
- * **strtow - breaks a str into words. Repeat delimiters are ignored
- * @str: the inputted string
- * @d: the delimiter string
- * Return: a ptr to an array of strings, or NULL on not success
+ * **strtow - splits a string into words. Repeat delimiters are ignored
+ * @str: the input string
+ * @d: the delimeter string
+ * Return: a ptr to an array of strings, or NULL on failure
  */
 char **strtow(char *str, char *d)
 {
-	int x, y, z, n, num_words = 0;
+	int x, y, z, t, numwords = 0;
 	char **s;
 
-	if (str == NULL || str[0] == '\0')
+	if (str == NULL || str[0] == 0)
 		return (NULL);
 	if (!d)
 		d = " ";
 	for (x = 0; str[x] != '\0'; x++)
 		if (!is_delim(str[x], d) && (is_delim(str[x + 1], d) || !str[x + 1]))
-			num_words++;
-	if (num_words == 0)
+			numwords++;
+	if (numwords == 0)
 		return (NULL);
-	s = malloc((1 + num_words) * sizeof(char *));
+	s = malloc((1 + numwords) * sizeof(char *));
 	if (!s)
 		return (NULL);
-	for (x = 0, y = 0; y < num_words; y++)
+	for (x = 0, y = 0; y < numwords; y++)
 	{
 		while (is_delim(str[x], d))
 			x++;
@@ -38,38 +37,36 @@ char **strtow(char *str, char *d)
 			free(s);
 			return (NULL);
 		}
-		for (n = 0; n < z; n++)
-			s[y][n] = str[x++];
-
-		s[y][n] = '\0';
+		for (t = 0; t < z; t++)
+			s[y][t] = str[x++];
+		s[y][t] = 0;
 	}
 	s[y] = NULL;
 	return (s);
 }
-
 /**
- * **strtow2 - breaks a string into words
- * @str: the inputted string
- * @d: the delimiter
+ * **strtow2 - break a str to words
+ * @str: the str to inputted
+ * @d: the delimeter
  * Return: a ptr to an array of str, or NULL on failure
  */
 char **strtow2(char *str, char d)
 {
-	int x, y, z, n, num_words = 0;
+	int x, y, z, t, numwords = 0;
 	char **s;
 
-	if (str == NULL || str[0] == '\0')
+	if (str == NULL || str[0] == 0)
 		return (NULL);
 	for (x = 0; str[x] != '\0'; x++)
 		if ((str[x] != d && str[x + 1] == d) ||
 				(str[x] != d && !str[x + 1]) || str[x + 1] == d)
-			num_words++;
-	if (num_words == 0)
+			numwords++;
+	if (numwords == 0)
 		return (NULL);
-	s = malloc((1 + num_words) * sizeof(char *));
+	s = malloc((1 + numwords) * sizeof(char *));
 	if (!s)
 		return (NULL);
-	for (x = 0, y = 0; y < num_words; y++)
+	for (x = 0, y = 0; y < numwords; y++)
 	{
 		while (str[x] == d && str[x] != d)
 			x++;
@@ -84,11 +81,10 @@ char **strtow2(char *str, char d)
 			free(s);
 			return (NULL);
 		}
-		for (n = 0; n < z; n++)
-			s[y][n] = str[x++];
-		s[y][n] = '\0';
+		for (t = 0; t < z; t++)
+			s[y][t] = str[x++];
+		s[y][t] = 0;
 	}
 	s[y] = NULL;
 	return (s);
 }
-

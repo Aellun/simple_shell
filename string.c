@@ -1,28 +1,24 @@
 #include "shell.h"
 
 /**
- * _strlen - returns the len of a str
- * @s: the str whose len to scan
- *
- * Return: integer len of str
+ * _strlen - print str len
+ * @s: the str whose len is bieng evaluated
+ * Return: int len of str
  */
 int _strlen(char *s)
 {
-	int z = 0;
+	int l = 0;
 
 	if (!s)
 		return (0);
-
 	while (*s++)
-		z++;
-	return (z);
+		l++;
+	return (l);
 }
-
 /**
- * _strcmp - performs vocabulary comparison of 2 str
- * @s1: the 1 str
- * @s2: the 2nd str
- *
+ * _strcmp - performs dictionary checks of two strs
+ * @s1: the first str to be checked
+ * @s2: the second str to be checked
  * Return: -ve if s1 < s2, +ve if s1 > s2, 0 if s1 == s2
  */
 int _strcmp(char *s1, char *s2)
@@ -39,13 +35,11 @@ int _strcmp(char *s1, char *s2)
 	else
 		return (*s1 < *s2 ? -1 : 1);
 }
-
 /**
- * starts_with - checks if needle starts with haystack
- * @haystack: stri to scan
- * @needle: the substr to check
- *
- * Return: ptr of next char of haystack or NULL
+ * starts_with - if a string starts with a given substring
+ * @haystack: str to search within
+ * @needle: the substring to look for
+ * Return: ptr to next char of haystack or NULL
  */
 char *starts_with(const char *haystack, const char *needle)
 {
@@ -56,11 +50,10 @@ char *starts_with(const char *haystack, const char *needle)
 }
 
 /**
- * _strcat - join 2 str
- * @dest: where the str is joined to
- * @src: the source of the str to join
- *
- * Return: ptr to desti buffer
+ * _strcat - join two strs
+ * @dest: the dest to be joined to
+ * @src: the source being joined to the other
+ * Return: ptr to dest buf
  */
 char *_strcat(char *dest, char *src)
 {
@@ -73,4 +66,3 @@ char *_strcat(char *dest, char *src)
 	*dest = *src;
 	return (ret);
 }
-
