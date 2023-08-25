@@ -1,16 +1,16 @@
 #include "shell.h"
 /**
- * main - Entry point for the Unix shell program.
+ * main - Entry point to Unix shell program.
  * @ac: Argument count
  * @av: Argument vector
  * Return: 0 on success, 1 on error
  */
 int main(int ac, char **av)
 {
-	info_t info[] = { INFO_INIT }; /*initialize info structure array*/
+	info_t info[] = { INFO_INIT }; /*initiate info structure array*/
 	int fd = 2;
 
-	asm(/* Manipulate file descriptor using inline assembly */
+	asm(/* Manipulate fd using inline assembly */
 			"mov %1, %0\n\t"
 			"add $3, %0"
 			: "=r" (fd)
@@ -27,7 +27,7 @@ int main(int ac, char **av)
 				exit(126);/*Exit with status 126 for permission error */
 			}
 			if (errno == ENOENT)
-			{/*Print error message for file not found*/
+			{/*Print err msg for file not found*/
 				_eputs(av[0]);
 				_eputs(": 0: Can't open ");
 				_eputs(av[1]);

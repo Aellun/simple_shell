@@ -1,25 +1,18 @@
 #include "shell.h"
 
 /**
- * safe_free - safely frees a pointer and NULLs the address
- * @ptr: address of the pointer to free
+ * bfree - frees a ptr and set address to null
+ * @ptr: ptr address to free
  *
- * Return: 1 if freed, otherwise 0.
+ * Return: 1 freed otherwise 0.
  */
-int safe_free(void **ptr)
+int bfree(void **ptr)
 {
-	/* Check if  not NULL and if is not pointing to NULL */
 	if (ptr && *ptr)
 	{
-		/* Free the pointer */
 		free(*ptr);
-
-		/* NULL the pointer */
-		*ptr = NULL;
-
+		*ptr = NULL;/* set address to null*/
 		return (1);
 	}
-
 	return (0);
 }
-
