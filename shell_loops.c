@@ -8,7 +8,7 @@
  */
 int hsh(info_t *info, char **av)
 {
-	ssize_t e = 0;  // Replaced 'r' with 'e'
+	ssize_t e = 0;
 	int builtin_ret = 0;
 
 	while (e != -1 && builtin_ret != -2)
@@ -17,7 +17,7 @@ int hsh(info_t *info, char **av)
 		if (interactive(info))
 			_puts("$ ");
 		_eputchar(BUF_FLUSH);
-		e = get_input(info);  // Replaced 'r' with 'e'
+		e = get_input(info);
 		if (e != -1)
 		{
 			set_info(info, av);
