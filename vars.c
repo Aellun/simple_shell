@@ -121,7 +121,7 @@ int replace_alias(info_t *info)
 						_strdup(_strchr(node->str, '=') + 1));
 				continue;
 			}
-			replace_string(&info->argv[i], _strdup(""));
+			replace_string(&info->argv[l], _strdup(""));
 		}
 		return (0);
 	}
@@ -137,4 +137,3 @@ int replace_alias(info_t *info)
 		*old = new;
 		return (1);
 	}
-
