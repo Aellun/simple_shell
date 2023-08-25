@@ -51,7 +51,7 @@ int hsh(info_t *info, char **av)
  */
 int find_builtin(info_t *info)
 {
-	int i, built_in_ret = -1;
+	int c, built_in_ret = -1;
 	builtin_table builtintbl[] = {
 		{"exit", _myexit},
 		{"env", _myenv},
@@ -65,7 +65,7 @@ int find_builtin(info_t *info)
 	};
 
 	for (c = 0; builtintbl[c].type; c++)
-		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
+		if (_strcmp(info->argv[0], builtintbl[c].type) == 0)
 		{
 			info->line_count++;
 			built_in_ret = builtintbl[c].func(info);
@@ -89,7 +89,7 @@ void find_cmd(info_t *info)
 		info->line_count++;
 		info->linecount_flag = 0;
 	}
-	for (c = 0, k = 0; info->arg[i]; c++)
+	for (c = 0, k = 0; info->arg[c]; c++)
 		if (!is_delim(info->arg[c], " \t\n"))
 			k++;
 	if (!k)

@@ -100,7 +100,7 @@ int replace_alias(info_t *info)
 
 		for (l = 0; info->argv[l]; l++)
 		{
-			if (info->argv[l][0] != '$' || !info->argv[i][1])
+			if (info->argv[l][0] != '$' || !info->argv[l][1])
 				continue;
 			if (!_strcmp(info->argv[l], "$?"))
 			{

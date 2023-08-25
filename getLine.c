@@ -73,7 +73,7 @@ ssize_t get_input(info_t *info)
 		i = j + 1; /* increment past nulled ';'' */
 		if (i >= len) /* reached end of buffer? */
 		{
-			i = len = 0; /* reset position and len/
+			i = len = 0; /* reset position and len*/
 					info->cmd_buf_type = CMD_NORM;
 					}
 				      *buf_p = p; /* pass back ptr to current command position */
